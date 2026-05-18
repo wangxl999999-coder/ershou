@@ -20,6 +20,23 @@ Page({
     this.loadCategories()
   },
 
+  onShow() {
+    this.resetForm()
+  },
+
+  resetForm() {
+    this.setData({
+      images: [],
+      title: '',
+      description: '',
+      price: '',
+      originalPrice: '',
+      categoryIndex: null,
+      locationIndex: null,
+      submitting: false
+    })
+  },
+
   async loadCategories() {
     const res = await api.getCategories()
     if (res.code === 0) {
@@ -120,6 +137,7 @@ Page({
       
       if (res.code === 0) {
         showToast('发布成功', 'success')
+        this.resetForm()
         setTimeout(() => {
           wx.switchTab({
             url: '/pages/index/index'
