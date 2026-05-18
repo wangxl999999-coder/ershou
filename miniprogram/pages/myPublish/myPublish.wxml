@@ -1,0 +1,48 @@
+<view class="container">
+  <view class="tab-bar">
+    <view class="tab-item {{currentTab === 1 ? 'active' : ''}}" bindtap="switchTab" data-tab="1">
+      <text>已上架</text>
+    </view>
+    <view class="tab-item {{currentTab === 0 ? 'active' : ''}}" bindtap="switchTab" data-tab="0">
+      <text>已下架</text>
+    </view>
+    <view class="tab-item {{currentTab === 2 ? 'active' : ''}}" bindtap="switchTab" data-tab="2">
+      <text>已卖出</text>
+    </view>
+  </view>
+
+  <view class="product-list" wx:if="{{products.length > 0}}">
+    <view class="product-item" wx:for="{{products}}" wx:key="id">
+      <image class="product-image" src="{{item.images[0]}}" mode="aspectFill"></image>
+      <view class="product-info">
+        <view class="product-title ellipsis-2">{{item.title}}</view>
+        <view class="product-price">
+          <text class="price-symbol">¥</text>
+          <text class="price-value">{{item.price}}</text>
+        </view>
+        <view class="product-stats">
+          <text class="stat-item">浏览 {{item.viewCount}}</text>
+          <text class="stat-item">{{item.polishTime}}</text>
+        </view>
+        <view class="product-actions" wx:if="{{item.status === 1}}">
+          <button class="action-btn polish-btn" bindtap="polishProduct" data-id="{{item.id}}">擦亮</button>
+          <button class="action-btn down-btn" bindtap="takeDownProduct" data-id="{{item.id}}">下架</button>
+        </view>
+        <view class="product-actions" wx:if="{{item.status === 0}}">
+          <button class="action-btn up-btn" bindtap="upProduct" data-id="{{item.id}}">重新上架</button>
+          <button class="action-btn delete-btn" bindtap="deleteProduct" data-id="{{item.id}}">删除</button>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="empty-state" wx:if="{{products.length === 0 && !loading}}">
+    <text class="empty-icon">📦</text>
+    <text class="empty-text">{{emptyText}}</text>
+    <button class="go-publish-btn" bindtap="goPublish" wx:if="{{currentTab === 1}}">去发布</button>
+  </view>
+
+  <view class="loading-state" wx:if="{{loading}}">
+    <text>加载中...</text>
+  </view>
+</view>

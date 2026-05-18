@@ -1,0 +1,77 @@
+<view class="container">
+  <view class="search-bar" bindtap="goSearch">
+    <text class="search-icon">🔍</text>
+    <text class="search-placeholder">搜索商品</text>
+  </view>
+
+  <scroll-view class="category-scroll" scroll-x="true" show-scrollbar="false">
+    <view class="category-list">
+      <view 
+        class="category-item {{currentCategory === 0 ? 'active' : ''}}"
+        bindtap="selectCategory"
+        data-id="0"
+      >
+        <text class="category-icon">🏠</text>
+        <text class="category-name">全部</text>
+      </view>
+      <view 
+        class="category-item {{currentCategory === item.id ? 'active' : ''}}"
+        wx:for="{{categories}}"
+        wx:key="id"
+        bindtap="selectCategory"
+        data-id="{{item.id}}"
+      >
+        <text class="category-icon">{{item.icon}}</text>
+        <text class="category-name">{{item.name}}</text>
+      </view>
+    </view>
+  </scroll-view>
+
+  <view class="filter-bar">
+    <view class="filter-item {{sortBy === 'default' ? 'active' : ''}}" bindtap="sortByDefault">
+      <text>最新</text>
+    </view>
+    <view class="filter-item {{sortBy === 'price' ? 'active' : ''}}" bindtap="sortByPrice">
+      <text>价格</text>
+      <text class="sort-icon" wx:if="{{sortBy === 'price'}}">{{sortOrder === 'asc' ? '↑' : '↓'}}</text>
+    </view>
+    <view class="filter-item {{sortBy === 'distance' ? 'active' : ''}}" bindtap="sortByDistance">
+      <text>距离</text>
+    </view>
+    <view class="filter-item" bindtap="showPriceFilter">
+      <text>价格区间</text>
+      <text class="filter-icon">▼</text>
+    </view>
+  </view>
+
+  <view class="product-list" wx:if="{{products.length > 0}}">
+    <product-card product="{{item}}" wx:for="{{products}}" wx:key="id"></product-card>
+  </view>
+
+  <view class="empty-state" wx:if="{{products.length === 0 && !loading}}">
+    <text class="empty-icon">📦</text>
+    <text class="empty-text">暂无商品</text>
+  </view>
+
+  <view class="loading-state" wx:if="{{loading}}">
+    <text>加载中...</text>
+  </view>
+</view>
+
+<view class="price-filter-modal {{showPriceModal ? 'show' : ''}}" catchtap="hidePriceFilter">
+  <view class="filter-content" catchtap="">
+    <view class="filter-header">
+      <text class="filter-title">价格区间</text>
+      <text class="filter-close" bindtap="hidePriceFilter">✕</text>
+    </view>
+    <view class="price-inputs">
+      <input class="price-input" type="digit" placeholder="最低价" bindinput="onMinPriceInput" value="{{minPrice}}" />
+      <text class="price-separator">-</text>
+      <input class="price-input" type="digit" placeholder="最高价" bindinput="onMaxPriceInput" value="{{maxPrice}}" />
+    </view>
+    <view class="filter-actions">
+      <button class="reset-btn" bindtap="resetPriceFilter">重置</button>
+      <button class="confirm-btn" bindtap="confirmPriceFilter">确定</button>
+    </view>
+  </view>
+</view>

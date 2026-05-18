@@ -1,0 +1,18 @@
+<view class="product-card" bindtap="onTap">
+  <image class="product-image" src="{{product.images[0]}}" mode="aspectFill"></image>
+  <view class="product-info">
+    <view class="product-title ellipsis-2">{{product.title}}</view>
+    <view class="product-price">
+      <text class="price-symbol">¥</text>
+      <text class="price-value">{{product.price}}</text>
+      <text class="price-original" wx:if="{{product.originalPrice}}">¥{{product.originalPrice}}</text>
+    </view>
+    <view class="product-footer">
+      <view class="product-location">
+        <text class="location-icon">📍</text>
+        <text class="location-text">{{product.location}}</text>
+      </view>
+      <view class="product-distance" wx:if="{{product.distance}}">{{product.distance}}km</view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,232 @@
+.container {
+  padding: 20rpx;
+  padding-bottom: 140rpx;
+}
+
+.status-card {
+  background: linear-gradient(135deg, #ff6b35, #ff8c5a);
+  border-radius: 16rpx;
+  padding: 40rpx 30rpx;
+  margin-bottom: 20rpx;
+  display: flex;
+  align-items: center;
+}
+
+.status-icon {
+  font-size: 60rpx;
+  margin-right: 24rpx;
+}
+
+.status-info {
+  flex: 1;
+}
+
+.status-text {
+  display: block;
+  font-size: 32rpx;
+  color: white;
+  font-weight: bold;
+  margin-bottom: 8rpx;
+}
+
+.status-desc {
+  font-size: 26rpx;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.address-card {
+  background-color: white;
+  border-radius: 12rpx;
+  padding: 24rpx;
+  margin-bottom: 20rpx;
+}
+
+.address-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.address-icon {
+  font-size: 28rpx;
+  margin-right: 8rpx;
+}
+
+.address-title {
+  font-size: 28rpx;
+  color: #333;
+  font-weight: bold;
+}
+
+.address-info {
+  padding-left: 36rpx;
+}
+
+.address-user {
+  margin-bottom: 12rpx;
+}
+
+.user-name {
+  font-size: 28rpx;
+  color: #333;
+  font-weight: bold;
+  margin-right: 20rpx;
+}
+
+.user-phone {
+  font-size: 26rpx;
+  color: #666;
+}
+
+.address-detail {
+  font-size: 26rpx;
+  color: #666;
+  line-height: 1.5;
+}
+
+.product-card {
+  background-color: white;
+  border-radius: 12rpx;
+  padding: 24rpx;
+  margin-bottom: 20rpx;
+  display: flex;
+}
+
+.product-image {
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 8rpx;
+  margin-right: 20rpx;
+}
+
+.product-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.product-title {
+  font-size: 28rpx;
+  color: #333;
+  line-height: 1.4;
+  margin-bottom: 12rpx;
+}
+
+.product-price {
+  font-size: 28rpx;
+  color: #ff6b35;
+  font-weight: bold;
+}
+
+.order-info-card {
+  background-color: white;
+  border-radius: 12rpx;
+  padding: 24rpx;
+  margin-bottom: 20rpx;
+}
+
+.info-title {
+  font-size: 28rpx;
+  color: #333;
+  font-weight: bold;
+  margin-bottom: 20rpx;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16rpx 0;
+}
+
+.info-label {
+  font-size: 26rpx;
+  color: #999;
+}
+
+.info-value {
+  font-size: 26rpx;
+  color: #333;
+  text-align: right;
+  max-width: 400rpx;
+}
+
+.amount-card {
+  background-color: white;
+  border-radius: 12rpx;
+  padding: 24rpx;
+}
+
+.amount-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12rpx 0;
+}
+
+.amount-item.total {
+  border-top: 1rpx solid #f5f5f5;
+  margin-top: 12rpx;
+  padding-top: 24rpx;
+}
+
+.amount-label {
+  font-size: 26rpx;
+  color: #666;
+}
+
+.amount-item.total .amount-label {
+  font-size: 28rpx;
+  color: #333;
+  font-weight: bold;
+}
+
+.amount-value {
+  font-size: 26rpx;
+  color: #333;
+}
+
+.amount-item.total .amount-value {
+  font-size: 32rpx;
+  color: #ff6b35;
+  font-weight: bold;
+}
+
+.bottom-actions {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: white;
+  padding: 20rpx 30rpx;
+  display: flex;
+  gap: 20rpx;
+  border-top: 1rpx solid #eee;
+}
+
+.action-btn {
+  flex: 1;
+  height: 88rpx;
+  line-height: 88rpx;
+  border-radius: 44rpx;
+  font-size: 28rpx;
+  border: none;
+}
+
+.contact-btn {
+  background-color: #f5f5f5;
+  color: #666;
+}
+
+.primary-btn {
+  background-color: #ff6b35;
+  color: white;
+}
+
+.loading {
+  text-align: center;
+  padding: 100rpx;
+  font-size: 28rpx;
+  color: #999;
+}

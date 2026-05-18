@@ -1,0 +1,84 @@
+<view class="container" wx:if="{{order}}">
+  <view class="status-card">
+    <text class="status-icon">{{order.status === 1 ? '📦' : order.status === 2 ? '🚚' : '✅'}}</text>
+    <view class="status-info">
+      <text class="status-text">{{order.statusText}}</text>
+      <text class="status-desc" wx:if="{{order.status === 1}}">请等待卖家发货</text>
+      <text class="status-desc" wx:if="{{order.status === 2}}">商品正在运输中</text>
+      <text class="status-desc" wx:if="{{order.status === 3}}">交易已完成</text>
+    </view>
+  </view>
+
+  <view class="address-card">
+    <view class="address-header">
+      <text class="address-icon">📍</text>
+      <text class="address-title">收货地址</text>
+    </view>
+    <view class="address-info">
+      <view class="address-user">
+        <text class="user-name">{{order.address.name}}</text>
+        <text class="user-phone">{{order.address.phone}}</text>
+      </view>
+      <text class="address-detail">{{order.address.address}}</text>
+    </view>
+  </view>
+
+  <view class="product-card" bindtap="goProductDetail">
+    <image class="product-image" src="{{order.product.images[0]}}" mode="aspectFill"></image>
+    <view class="product-info">
+      <view class="product-title ellipsis-2">{{order.product.title}}</view>
+      <view class="product-price">¥{{order.price}}</view>
+    </view>
+  </view>
+
+  <view class="order-info-card">
+    <view class="info-title">订单信息</view>
+    <view class="info-item">
+      <text class="info-label">订单编号</text>
+      <text class="info-value">{{order.id}}</text>
+    </view>
+    <view class="info-item">
+      <text class="info-label">创建时间</text>
+      <text class="info-value">{{order.createTime}}</text>
+    </view>
+    <view class="info-item" wx:if="{{order.payTime}}">
+      <text class="info-label">支付时间</text>
+      <text class="info-value">{{order.payTime}}</text>
+    </view>
+    <view class="info-item" wx:if="{{order.shipTime}}">
+      <text class="info-label">发货时间</text>
+      <text class="info-value">{{order.shipTime}}</text>
+    </view>
+    <view class="info-item" wx:if="{{order.logistics}}">
+      <text class="info-label">物流信息</text>
+      <text class="info-value">{{order.logistics}}</text>
+    </view>
+    <view class="info-item" wx:if="{{order.confirmTime}}">
+      <text class="info-label">确认收货时间</text>
+      <text class="info-value">{{order.confirmTime}}</text>
+    </view>
+  </view>
+
+  <view class="amount-card">
+    <view class="amount-item">
+      <text class="amount-label">商品金额</text>
+      <text class="amount-value">¥{{order.price}}</text>
+    </view>
+    <view class="amount-item">
+      <text class="amount-label">运费</text>
+      <text class="amount-value">¥0</text>
+    </view>
+    <view class="amount-item total">
+      <text class="amount-label">实付款</text>
+      <text class="amount-value">¥{{order.price}}</text>
+    </view>
+  </view>
+
+  <view class="bottom-actions" wx:if="{{order.status !== 3}}">
+    <button class="action-btn contact-btn" bindtap="goChat">联系对方</button>
+    <button class="action-btn primary-btn" wx:if="{{order.status === 2}}" bindtap="confirmReceive">确认收货</button>
+    <button class="action-btn primary-btn" wx:if="{{order.status === 1 && order.sellerId === 1}}" bindtap="goShip">去发货</button>
+  </view>
+</view>
+
+<view class="loading" wx:if="{{!order}}">加载中...</view>

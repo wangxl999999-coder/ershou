@@ -1,0 +1,37 @@
+<view class="container">
+  <scroll-view 
+    class="message-list" 
+    scroll-y="true" 
+    scroll-into-view="{{scrollToView}}"
+    scroll-with-animation="true"
+  >
+    <view 
+      class="message-item {{item.senderId === currentUserId ? 'self' : 'other'}}" 
+      wx:for="{{messages}}" 
+      wx:key="id"
+      id="msg-{{item.id}}"
+    >
+      <image 
+        class="message-avatar" 
+        src="{{item.senderId === currentUserId ? currentUserAvatar : otherUserAvatar}}" 
+        mode="aspectFill"
+      ></image>
+      <view class="message-content">
+        <view class="message-bubble">{{item.content}}</view>
+        <text class="message-time" wx:if="{{item.createTime}}">{{item.createTime}}</text>
+      </view>
+    </view>
+  </scroll-view>
+
+  <view class="input-bar">
+    <input 
+      class="message-input" 
+      placeholder="输入消息..." 
+      value="{{inputText}}"
+      bindinput="onInput"
+      bindconfirm="sendMessage"
+      confirm-type="send"
+    />
+    <button class="send-btn" bindtap="sendMessage" disabled="{{!inputText.trim()}}">发送</button>
+  </view>
+</view>

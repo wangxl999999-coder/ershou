@@ -1,0 +1,98 @@
+<view class="container">
+  <view class="form-section">
+    <view class="section-title">上传图片 <text class="required">*</text></view>
+    <view class="image-upload">
+      <view class="image-item" wx:for="{{images}}" wx:key="*this">
+        <image class="uploaded-image" src="{{item}}" mode="aspectFill"></image>
+        <text class="delete-image" bindtap="deleteImage" data-index="{{index}}">✕</text>
+      </view>
+      <view class="add-image" wx:if="{{images.length < 9}}" bindtap="chooseImage">
+        <text class="add-icon">+</text>
+        <text class="add-text">{{images.length}}/9</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="form-section">
+    <view class="section-title">商品标题 <text class="required">*</text></view>
+    <input 
+      class="form-input" 
+      placeholder="请输入商品标题（最多30字）" 
+      value="{{title}}"
+      bindinput="onTitleInput"
+      maxlength="30"
+    />
+    <view class="char-count">{{title.length}}/30</view>
+  </view>
+
+  <view class="form-section">
+    <view class="section-title">商品分类 <text class="required">*</text></view>
+    <picker bindchange="onCategoryChange" value="{{categoryIndex}}" range="{{categoryNames}}">
+      <view class="picker-input">
+        <text class="{{categoryIndex === null ? 'placeholder' : ''}}">
+          {{categoryIndex !== null ? categoryNames[categoryIndex] : '请选择分类'}}
+        </text>
+        <text class="picker-arrow">›</text>
+      </view>
+    </picker>
+  </view>
+
+  <view class="form-section">
+    <view class="section-title">商品价格 <text class="required">*</text></view>
+    <view class="price-input-wrapper">
+      <text class="price-symbol">¥</text>
+      <input 
+        class="price-input" 
+        type="digit" 
+        placeholder="0.00" 
+        value="{{price}}"
+        bindinput="onPriceInput"
+      />
+    </view>
+  </view>
+
+  <view class="form-section">
+    <view class="section-title">原价</view>
+    <view class="price-input-wrapper">
+      <text class="price-symbol">¥</text>
+      <input 
+        class="price-input" 
+        type="digit" 
+        placeholder="0.00" 
+        value="{{originalPrice}}"
+        bindinput="onOriginalPriceInput"
+      />
+    </view>
+  </view>
+
+  <view class="form-section">
+    <view class="section-title">商品描述</view>
+    <textarea 
+      class="form-textarea" 
+      placeholder="请详细描述商品的成色、尺寸、购买时间、转手原因等信息（最多500字）"
+      value="{{description}}"
+      bindinput="onDescriptionInput"
+      maxlength="500"
+      auto-height
+    />
+    <view class="char-count">{{description.length}}/500</view>
+  </view>
+
+  <view class="form-section">
+    <view class="section-title">所在位置</view>
+    <picker bindchange="onLocationChange" value="{{locationIndex}}" range="{{locations}}">
+      <view class="picker-input">
+        <text class="{{locationIndex === null ? 'placeholder' : ''}}">
+          {{locationIndex !== null ? locations[locationIndex] : '点击选择位置'}}
+        </text>
+        <text class="picker-arrow">›</text>
+      </view>
+    </picker>
+  </view>
+
+  <view class="submit-section">
+    <button class="submit-btn" bindtap="submit" disabled="{{submitting}}">
+      {{submitting ? '发布中...' : '一键发布'}}
+    </button>
+  </view>
+</view>

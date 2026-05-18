@@ -1,0 +1,74 @@
+<view class="container" wx:if="{{product}}">
+  <swiper class="image-swiper" indicator-dots="true" indicator-color="rgba(255,255,255,0.5)" indicator-active-color="#fff">
+    <swiper-item wx:for="{{product.images}}" wx:key="*this">
+      <image class="swiper-image" src="{{item}}" mode="aspectFit"></image>
+    </swiper-item>
+  </swiper>
+
+  <view class="product-info">
+    <view class="product-price">
+      <text class="price-symbol">¥</text>
+      <text class="price-value">{{product.price}}</text>
+      <text class="price-original" wx:if="{{product.originalPrice}}">¥{{product.originalPrice}}</text>
+    </view>
+    <view class="product-title">{{product.title}}</view>
+    <view class="product-stats">
+      <text class="stat-item">浏览 {{product.viewCount}}</text>
+      <text class="stat-item">发布于 {{product.createTime}}</text>
+    </view>
+  </view>
+
+  <view class="seller-card" bindtap="goChat">
+    <image class="seller-avatar" src="{{product.userAvatar}}" mode="aspectFill"></image>
+    <view class="seller-info">
+      <text class="seller-name">{{product.userName}}</text>
+      <text class="seller-location">📍 {{product.location}}</text>
+    </view>
+    <text class="chat-btn">💬 聊一聊</text>
+  </view>
+
+  <view class="description-card">
+    <view class="section-title">商品描述</view>
+    <view class="description-text">{{product.description}}</view>
+  </view>
+
+  <view class="bottom-bar">
+    <button class="contact-btn" bindtap="goChat">
+      <text class="btn-icon">💬</text>
+      <text class="btn-text">联系卖家</text>
+    </button>
+    <button class="buy-btn" bindtap="goBuy">立即购买</button>
+  </view>
+</view>
+
+<view class="loading" wx:if="{{!product}}">加载中...</view>
+
+<view class="address-modal {{showAddressModal ? 'show' : ''}}" catchtap="hideAddressModal">
+  <view class="modal-content" catchtap="">
+    <view class="modal-header">
+      <text class="modal-title">选择收货地址</text>
+      <text class="modal-close" bindtap="hideAddressModal">✕</text>
+    </view>
+    <view class="address-list">
+      <view 
+        class="address-item {{selectedAddressId === item.id ? 'selected' : ''}}"
+        wx:for="{{addresses}}" 
+        wx:key="id"
+        bindtap="selectAddress"
+        data-id="{{item.id}}"
+      >
+        <text class="address-radio">{{selectedAddressId === item.id ? '◉' : '○'}}</text>
+        <view class="address-info">
+          <view class="address-top">
+            <text class="address-name">{{item.name}}</text>
+            <text class="address-phone">{{item.phone}}</text>
+            <text class="address-default" wx:if="{{item.isDefault}}">默认</text>
+          </view>
+          <text class="address-detail">{{item.province}}{{item.city}}{{item.district}}{{item.address}}</text>
+        </view>
+      </view>
+    </view>
+    <button class="add-address-btn" bindtap="goAddAddress">+ 添加收货地址</button>
+    <button class="confirm-buy-btn" bindtap="confirmOrder" wx:if="{{selectedAddressId}}">确认下单 ¥{{product ? product.price : 0}}</button>
+  </view>
+</view>

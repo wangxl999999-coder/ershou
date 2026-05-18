@@ -1,0 +1,45 @@
+<view class="container">
+  <view class="search-header">
+    <view class="search-input-wrapper">
+      <text class="search-icon">🔍</text>
+      <input 
+        class="search-input" 
+        placeholder="搜索商品" 
+        value="{{keyword}}"
+        bindinput="onInput"
+        bindconfirm="onSearch"
+        focus="true"
+      />
+      <text class="clear-icon" wx:if="{{keyword}}" bindtap="clearKeyword">✕</text>
+    </view>
+    <text class="cancel-btn" bindtap="goBack">取消</text>
+  </view>
+
+  <view class="search-history" wx:if="{{historyList.length > 0 && !keyword}}">
+    <view class="history-header">
+      <text class="history-title">搜索历史</text>
+      <text class="clear-history" bindtap="clearHistory">清空</text>
+    </view>
+    <view class="history-tags">
+      <text class="history-tag" wx:for="{{historyList}}" wx:key="*this" bindtap="searchHistory" data-keyword="{{item}}">{{item}}</text>
+    </view>
+  </view>
+
+  <view class="search-suggest" wx:if="{{suggestList.length > 0 && keyword && !hasSearched}}">
+    <view class="suggest-item" wx:for="{{suggestList}}" wx:key="*this" bindtap="searchSuggest" data-keyword="{{item}}">
+      <text class="suggest-icon">🔍</text>
+      <text class="suggest-text">{{item}}</text>
+    </view>
+  </view>
+
+  <view class="search-results" wx:if="{{hasSearched}}">
+    <view class="result-count" wx:if="{{products.length > 0}}">共找到 {{products.length}} 件商品</view>
+    <view class="product-list" wx:if="{{products.length > 0}}">
+      <product-card product="{{item}}" wx:for="{{products}}" wx:key="id"></product-card>
+    </view>
+    <view class="empty-state" wx:if="{{products.length === 0}}">
+      <text class="empty-icon">🔍</text>
+      <text class="empty-text">未找到相关商品</text>
+    </view>
+  </view>
+</view>

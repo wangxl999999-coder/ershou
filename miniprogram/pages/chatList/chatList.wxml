@@ -1,0 +1,23 @@
+<view class="container">
+  <view class="chat-list" wx:if="{{chatList.length > 0}}">
+    <view class="chat-item" wx:for="{{chatList}}" wx:key="id" bindtap="goChat" data-user="{{item}}">
+      <view class="avatar-wrapper">
+        <image class="user-avatar" src="{{item.userAvatar}}" mode="aspectFill"></image>
+        <view class="unread-badge" wx:if="{{item.unreadCount > 0}}">{{item.unreadCount > 99 ? '99+' : item.unreadCount}}</view>
+      </view>
+      <view class="chat-info">
+        <view class="chat-top">
+          <text class="user-name">{{item.userName}}</text>
+          <text class="last-time">{{item.lastTime}}</text>
+        </view>
+        <text class="last-message ellipsis">{{item.lastMessage}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="empty-state" wx:if="{{chatList.length === 0}}">
+    <text class="empty-icon">💬</text>
+    <text class="empty-text">暂无消息</text>
+    <text class="empty-desc">去逛逛发现心仪的商品吧</text>
+  </view>
+</view>
